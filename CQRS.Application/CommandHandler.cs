@@ -44,10 +44,6 @@ namespace CQRS.Application
 
             var order = OrderReadRepository.Get(command.OrderId);
             order.IsShipped = true;
-
-            //var order = await _eventStore.LoadAggregateAsync<Order>(command.OrderId);
-            //order.Ship();
-            //await _eventStore.AppendEventAsync(order.Id, new OrderShippedEvent(order.Id));
         }
 
         public List<IEvent> GetHistory(Guid orderId)

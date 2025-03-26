@@ -2,14 +2,8 @@
 {
     public class OrderReadRepository : IOrderReadRepository
     {
-        //private readonly OrderDbContext _context;
         private readonly Dictionary<Guid, OrderReadModel> Orders = new Dictionary<Guid, OrderReadModel>();
-        //private readonly List<Order> Orders = new List<Order>();
 
-        //public OrderReadRepository(OrderDbContext context)
-        //{
-        //    _context = context;
-        //}
 
         public OrderReadModel? Get(Guid orderId)
         {
@@ -28,9 +22,7 @@
 
         public void Update(OrderReadModel order)
         {
-            //var currentOrder = Get(order.OrderId);
             Orders[order.OrderId] = order;
-            //Orders[order.ord]
         }
     }
 }

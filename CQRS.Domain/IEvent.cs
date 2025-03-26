@@ -5,21 +5,21 @@ namespace CQRS.Domain;
 [JsonObject(ItemTypeNameHandling = TypeNameHandling.Auto)]
 public interface IEvent
 {
-    Guid AggregateId { get; }
+    Guid OrderId { get; }
     DateTime Timestamp { get; }
 }
 
-public record OrderCreatedEvent(Guid AggregateId, string CustomerId) : IEvent
+public record OrderCreatedEvent(Guid OrderId, string CustomerId) : IEvent
 {
     public DateTime Timestamp { get; } = DateTime.UtcNow;
 }
 
-public record ItemAddedEvent(Guid AggregateId, string Item) : IEvent
+public record ItemAddedEvent(Guid OrderId, string Item) : IEvent
 {
     public DateTime Timestamp { get; } = DateTime.UtcNow;
 }
 
-public record OrderShippedEvent(Guid AggregateId) : IEvent
+public record OrderShippedEvent(Guid OrderId) : IEvent
 {
     public DateTime Timestamp { get; } = DateTime.UtcNow;
 }

@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="OrderQueryHandler.cs" />
+    <Compile Remove="Query.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CQRS.Domain\CQRS.Domain.csproj" />
     <ProjectReference Include="..\CQRS.ReadModel\CQRS.ReadModel.csproj" />
   </ItemGroup>

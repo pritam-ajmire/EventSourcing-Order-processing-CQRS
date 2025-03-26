@@ -7,3 +7,5 @@ public class OrderReadModel
     public List<string> Items { get; set; } = new List<string>();
     public bool IsShipped { get; set; }
 }
+
+// Can create other read models for Payment, for shipment etc
