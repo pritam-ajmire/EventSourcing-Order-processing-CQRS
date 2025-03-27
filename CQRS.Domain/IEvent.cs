@@ -9,6 +9,8 @@ public interface IEvent
     DateTime Timestamp { get; }
 }
 
+// domain events
+
 public record OrderCreatedEvent(Guid OrderId, string CustomerId) : IEvent
 {
     public DateTime Timestamp { get; } = DateTime.UtcNow;

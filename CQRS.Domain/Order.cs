@@ -1,5 +1,6 @@
 ﻿namespace CQRS.Domain
 {
+    // Domain Models
     public class Order
     {
 

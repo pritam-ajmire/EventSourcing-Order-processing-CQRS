@@ -19,15 +19,19 @@ namespace CQRS.ReadModel
                     _repository.Save(new OrderReadModel { OrderId = e.OrderId, CustomerId = e.CustomerId, Items = new List<string>(), IsShipped = false });
                     break;
                 case ItemAddedEvent e:
-                    var order = _repository.Get(e.OrderId);
-                    order.Items.Add(e.Item);
-                    _repository.Update(order);
-                    break;
+                    {
+                        var order = _repository.Get(e.OrderId);
+                        order.Items.Add(e.Item);
+                        _repository.Update(order);
+                        break;
+                    }
                 case OrderShippedEvent e:
-                    var shippedOrder = _repository.Get(e.OrderId);
-                    shippedOrder.IsShipped = true;
-                    _repository.Update(shippedOrder);
-                    break;
+                    {
+                        var order = _repository.Get(e.OrderId);
+                        order.IsShipped = true;
+                        _repository.Update(order);
+                        break;
+                    }
             }
         }
     }

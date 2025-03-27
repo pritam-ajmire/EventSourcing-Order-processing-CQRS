@@ -33,7 +33,6 @@ namespace CQRS.Application
 
             // reaise event to update read model
             orderProjection.ApplyEvent(orderCreatedEvent);
-            //OrderReadRepository.Save(new OrderReadModel { OrderId = order.OrderId, CustomerId = order.CustomerId });
         }
 
         public void Handle(AddItemCommand command)
@@ -44,8 +43,6 @@ namespace CQRS.Application
 
             // raise event & update read model
             orderProjection.ApplyEvent(itemAddedEvent);
-            //var order = OrderReadRepository.Get(command.OrderId);
-            //order.Items.Add(command.Item);
         }
 
         public void Handle(ShipOrderCommand command)
@@ -57,8 +54,6 @@ namespace CQRS.Application
 
             // raise event & update read model
             orderProjection.ApplyEvent(orderShippedEvent);
-            //var order = OrderReadRepository.Get(command.OrderId);
-            //order.IsShipped = true;
         }
 
         public List<IEvent> GetHistory(Guid orderId)
