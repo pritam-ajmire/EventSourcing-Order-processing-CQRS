@@ -8,12 +8,12 @@ namespace CQRS.Application
         //private readonly IEventStore _eventStore;
         private Dictionary<Guid, List<IEvent>> _eventStore = new Dictionary<Guid, List<IEvent>>();
         public IOrderReadRepository OrderReadRepository { get; }
-        private OrderProjection orderProjection { get; }
-        public CommandHandler(IOrderReadRepository orderReadRepository)
+        private OrderProjection _orderProjection { get; }
+        public CommandHandler(IOrderReadRepository orderReadRepository, OrderProjection orderProjection)
         {
             //_eventStore = eventStore;
             OrderReadRepository = orderReadRepository;
-            orderProjection = new OrderProjection(orderReadRepository);
+            _orderProjection = orderProjection;
         }
 
 
@@ -32,7 +32,7 @@ namespace CQRS.Application
             _eventStore.Add(command.OrderId, events);
 
             // reaise event to update read model
-            orderProjection.ApplyEvent(orderCreatedEvent);
+            _orderProjection.ApplyEvent(orderCreatedEvent);
         }
 
         public void Handle(AddItemCommand command)
@@ -42,7 +42,18 @@ namespace CQRS.Application
             _eventStore[command.OrderId].Add(itemAddedEvent);
 
             // raise event & update read model
-            orderProjection.ApplyEvent(itemAddedEvent);
+            _orderProjection.ApplyEvent(itemAddedEvent);
+        }
+
+        public void Handle(SubmitOrderCommand command)
+        {
+            // save in event store db
+            var orderSubmittedEvent = new OrderSubmittedEvent(command.OrderId);
+            _eventStore[command.OrderId].Add(orderSubmittedEvent);
+
+
+            // raise event & update read model
+            _orderProjection.ApplyEvent(orderSubmittedEvent);
         }
 
         public void Handle(ShipOrderCommand command)
@@ -53,7 +64,7 @@ namespace CQRS.Application
 
 
             // raise event & update read model
-            orderProjection.ApplyEvent(orderShippedEvent);
+            _orderProjection.ApplyEvent(orderShippedEvent);
         }
 
         public List<IEvent> GetHistory(Guid orderId)

@@ -21,6 +21,11 @@ public record ItemAddedEvent(Guid OrderId, string Item) : IEvent
     public DateTime Timestamp { get; } = DateTime.UtcNow;
 }
 
+public record OrderSubmittedEvent(Guid OrderId) : IEvent
+{
+    public DateTime Timestamp { get; } = DateTime.UtcNow;
+}
+
 public record OrderShippedEvent(Guid OrderId) : IEvent
 {
     public DateTime Timestamp { get; } = DateTime.UtcNow;

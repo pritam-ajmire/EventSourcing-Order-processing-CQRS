@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSingleton(typeof(IOrderReadRepository), typeof(OrderReadRepository));
 builder.Services.AddSingleton(typeof(CommandHandler), typeof(CommandHandler));
+builder.Services.AddSingleton(typeof(OrderProjection), typeof(OrderProjection));
 
 builder.Services.AddOpenApi();
 

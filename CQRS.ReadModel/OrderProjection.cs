@@ -25,6 +25,13 @@ namespace CQRS.ReadModel
                         _repository.Update(order);
                         break;
                     }
+                case OrderSubmittedEvent e:
+                    {
+                        var order = _repository.Get(e.OrderId);
+                        order.IsSubmitted = true;
+                        _repository.Update(order);
+                        break;
+                    }
                 case OrderShippedEvent e:
                     {
                         var order = _repository.Get(e.OrderId);

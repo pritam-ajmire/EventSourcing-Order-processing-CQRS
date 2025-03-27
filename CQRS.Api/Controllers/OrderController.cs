@@ -32,6 +32,14 @@ namespace CQRS.Api.Controllers
             return Ok("Item Added");
         }
 
+        [HttpPost("{orderId}/submit")]
+        public IActionResult SubmitOrder(Guid orderId)
+        {
+            var command = new SubmitOrderCommand { OrderId = orderId };
+            _commandHandler.Handle(command);
+            return Ok("Order submitted");
+        }
+
         [HttpPost("{orderId}/ship")]
         public IActionResult ShipOrder(Guid orderId)
         {

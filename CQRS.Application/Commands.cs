@@ -24,6 +24,11 @@ public class AddItemCommand
     }
 }
 
+public class SubmitOrderCommand
+{
+    public Guid OrderId { get; set; }
+}
+
 public class ShipOrderCommand
 {
     public Guid OrderId { get; set; }

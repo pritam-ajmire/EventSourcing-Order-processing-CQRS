@@ -13,6 +13,7 @@
         public Guid OrderId { get; set; }
         public string CustomerId { get; set; }
         public List<string> Items { get; set; }
+        public bool IsSubmitted { get; set; }
         public bool IsShipped { get; set; }
     }
 }
