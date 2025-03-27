@@ -20,7 +20,7 @@ namespace CQRS.Api.Controllers
         [HttpPost]
         public IActionResult CreateOrder([FromBody] CreateOrderCommand command)
         {
-            _commandHandler.HandleAsync(command);
+            _commandHandler.Handle(command);
             return Ok("Order Created");
         }
 
@@ -28,7 +28,7 @@ namespace CQRS.Api.Controllers
         public IActionResult AddItem(Guid orderId, [FromBody] AddItemCommand command)
         {
             command.OrderId = orderId;
-            _commandHandler.HandleAsync(command);
+            _commandHandler.Handle(command);
             return Ok("Item Added");
         }
 
@@ -36,7 +36,7 @@ namespace CQRS.Api.Controllers
         public IActionResult ShipOrder(Guid orderId)
         {
             var command = new ShipOrderCommand { OrderId = orderId };
-            _commandHandler.HandleAsync(command);
+            _commandHandler.Handle(command);
             return Ok("Order Shipped");
         }
 
@@ -61,5 +61,6 @@ namespace CQRS.Api.Controllers
             var orders = _commandHandler.GetHistory(orderId);
             return Ok(orders);
         }
+
     }
 }

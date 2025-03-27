@@ -4,7 +4,6 @@
     {
 
         OrderReadModel? Get(Guid orderId);
-
         List<OrderReadModel> GetAllAsync();
 
 
